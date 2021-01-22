@@ -34,18 +34,23 @@
                             v-model="search"
                     >
                 </div>
-
-                <div class="list-group">
-                    <button type="button"
-                            v-for="location in locations.data" 
-                            :key="location.id" 
-                            class="list-group-item list-group-item-action"
-                    >                        
-                        <strong class="d-block">{{location.name}}</strong>
-                        <small class="d-block">Abierto de {{location.opening_time}} - {{location.closing_time}}</small>
-                        <small class="d-block">{{location.address}}</small>
-                    </button>           
-                </div>
+                <template v-if="locationsFiltrados.length > 0">
+                    <div class="list-group">
+                        <button type="button"
+                                v-for="location in locationsFiltrados" 
+                                :key="location.id" 
+                                class="list-group-item list-group-item-action"
+                        >                        
+                            <strong class="d-block">{{location.name}}</strong>
+                            <small class="d-block">Abierto de {{location.opening_time}} - {{location.closing_time}}</small>
+                            <small class="d-block">{{location.address}}</small>
+                        </button>           
+                    </div>
+                </template>
+                <template v-else>
+                    <img class="no-results" src="../assets/imagenes/errorSearch - desktop.png" alt="Locations">    
+                </template>
+                
 
                 
             </div>
@@ -70,6 +75,23 @@ export default {
     created () {
         this.getLocations('takeaway');
     },
+    computed: {
+        locationsFiltrados(){
+            
+            if (this.search == null) {
+                //this.itemsFiltrado = this.items;
+                return this.locations;
+            } else {
+                return this.locations.filter(location =>{
+                    if (location.name.includes(this.search) || location.address.includes(this.search)) {
+                        return true;
+                    }
+                });
+            }
+            
+            
+        },
+    },
     methods: {
         tipoPedido(tipo) {
             if(tipo === 'takeaway'){
@@ -86,7 +108,7 @@ export default {
             var locationsArray =[];
             axios.get('api/locations?type=' + tipoPedido)
             .then(response =>{                
-                this.locations = response.data;
+                this.locations = response.data.data;
             }).catch(function(error){
                 console.log(error);
             })         
@@ -108,4 +130,10 @@ export default {
 
         background: url('../assets/imagenes/sucursales/Rectangle 4.png');
     }
+    .no-results{
+        position: relative;
+        width: 566px;
+        height: 341px;
+    }
+    
 </style>

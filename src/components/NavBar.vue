@@ -28,7 +28,7 @@
                         <a class="nav-link " href="#" tabindex="-1" >Menu</a>
                     </li>
                     <li class="nav-item mx-4">
-                        <a class="nav-link" href="/about">Contactanos</a>
+                        <a class="nav-link" href="#" @click.prevent="scrollToSection('#contactanos')">Contactanos</a>
                     </li>
                     
                 </ul>            
