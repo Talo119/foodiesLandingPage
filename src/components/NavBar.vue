@@ -14,7 +14,7 @@
             </button>           
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02" v-bind:class="{ 'show': show }">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item mx-4">
                         <a class="nav-link" href="#" @click.prevent="scrollToSection('#home')" target="_self">Inicio</a>
                     </li>

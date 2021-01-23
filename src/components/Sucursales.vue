@@ -55,7 +55,7 @@
                 
             </div>
             <div class="col-md-7">
-                <img class="sucursales-img" src="../assets/imagenes/sucursales/Rectangle 4.png" alt="Locations">
+                <img class="sucursales-img d-none d-sm-block" src="../assets/imagenes/sucursales/Rectangle 4.png" alt="Locations">
             </div>
       </div>
       
